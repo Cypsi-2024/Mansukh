@@ -1,6 +1,9 @@
 huggingface_hub
+python-dotenv 
 transformers
 gradio
 pinecone
 langchain
-# chatbot_env 
+Flask
+httpx
+# chat_env 
