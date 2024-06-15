@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form | Dan Aleko</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-  <div class="wrapper">
-    <form action="">
-      <h1>Login</h1>
-      <div class="input-box">
-        <input type="text" placeholder="Username" required>
-        <i class='bx bxs-user'></i>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Password" required>
-        <i class='bx bxs-lock-alt' ></i>
-      </div>
-     
+from flask import Flask, render_template
+import threading
+from gradio_app1 import launch_chatbot
 
-      <button type="submit" class="btn">Login</button>
-      <div class="register-link">
-        <p>Dont have an account? <a href=""window.location.href='/register'"">Register</a></p>
-      </div>
-      <div class="chatbot-link">
-        <a href=""window.location.href='/gradio_app'"">Launch chatbot</a></p>
-      </div>
-    </form>
-  </div>
-</body>
-</html>
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+
+@app.route('/chatbot')
+def chatbot():   
+    return render_template('chatbot.html')
+
+
+
+if __name__ == "__main__":
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+    app.run(debug=True)
