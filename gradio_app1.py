@@ -2,7 +2,7 @@ from huggingface_hub import HfApi, HfFolder, InferenceClient
 import gradio as gr
 
 # Replace 'your_hugging_face_token' with your actual Hugging Face token
-hf_token = "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"
+hf_token = "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"
 
 # Save the token to the Hugging Face cache directory
 HfFolder.save_token(hf_token)
@@ -19,7 +19,7 @@ print(f"Successfully authenticated as: {user_info['name']}")
 client = InferenceClient("HuggingFaceH4/zephyr-7b-beta")
 
 
-def respond(message, history, system_message, max_tokens):
+def respond(message, history, system_message):
     messages = [{"role": "system", "content": system_message}]
 
     for val in history:
@@ -32,7 +32,7 @@ def respond(message, history, system_message, max_tokens):
 
     response = client.chat_completion(
         messages=messages,
-        max_tokens=max_tokens,
+        # max_tokens=max_tokens,
         stream=False,
     )
 
@@ -41,10 +41,10 @@ def respond(message, history, system_message, max_tokens):
 def create_chatbot_interface():
     chatbot_interface = gr.ChatInterface(
         respond,
-        # additional_inputs=[
-        #     gr.Textbox(value="You are a helpful bot. Your answers are clear and concise.", label="System message"),
+        additional_inputs=[
+            gr.Textbox(value="You are a helpful bot. Your answers are clear and concise.", label="System message"),
         #     gr.Slider(minimum=1, maximum=2048, value=512, step=1, label="Max new tokens"),
-        # ],
+        ],
     )
     return chatbot_interface
 
