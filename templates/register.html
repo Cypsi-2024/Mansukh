@@ -1,77 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Registration Form In HTML and CSS</title>
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Mansukh - Mental Health Chatbot</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
-    <div class="container">
-        <h2>Register for Mental Health Chatbot</h2>
-        <form id="registrationForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+    <header class="navbar">
+        <div class="logo">
+            <img src="/static/images/logo.png" alt="Mansukh Logo">
+        </div>
+    </header>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+    <main>
+        <div class="background-image">
+            <img src="/static/images/Bg.png" alt="Background Image">
+        </div>
+        <div class="wrapper">
+            <h2>Register</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form id="registrationForm" method="POST" action="{{ url_for('register') }}">
+                {{ form.hidden_tag() }}
+                <div class="input-box">
+                    {{ form.username.label }}
+                    {{ form.username(class_="form-control", id="username") }}
+                    {% for error in form.username.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    {{ form.password.label }}
+                    {{ form.password(class_="form-control", id="password") }}
+                    {% for error in form.password.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    {{ form.dob.label }}
+                    {{ form.dob(class_="form-control", id="dob") }}
+                    {% for error in form.dob.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    {{ form.email.label }}
+                    {{ form.email(class_="form-control", id="email") }}
+                    {% for error in form.email.errors %}
+                        <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <div class="input-box">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </main>
 
-            <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob" name="dob" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
-
-            <button onclick="window.location.href='/login'">Submit</button>
-        </form>
-    </div>
-    <script src="scripts.js">document.getElementById('registrationForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const dob = document.getElementById('dob').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-
-    if (validateForm(username, password, dob, email, phone)) {
-        alert('Registration successful');
-        // Perform further actions such as sending the data to the server
-    }
-});
-
-function validateForm(username, password, dob, email, phone) {
-    if (username === '' || password === '' || dob === '' || email === '' || phone === '') {
-        alert('All fields are required');
-        return false;
-    }
-
-    if (!validateEmail(email)) {
-        alert('Please enter a valid email address');
-        return false;
-    }
-
-    if (!validatePhone(phone)) {
-        alert('Please enter a valid phone number');
-        return false;
-    }
-
-    return true;
-}
-
-function validateEmail(email) {
-    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return re.test(email);
-}
-
-function validatePhone(phone) {
-    const re = /^\d{10}$/;
-    return re.test(phone);
-}
-</script>
+    <footer>
+        <p>&copy; 2024 Mansukh. All rights reserved.</p>
+    </footer>
 </body>
 </html>
-

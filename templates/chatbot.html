@@ -1,13 +1,31 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Chatbot | Mansukh - Mental Health Chatbot</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <iframe src="http://localhost:7860/" width="80%" height="800"></iframe>
+  <header class="navbar">
+    <div class="logo">
+      <img src="/static/images/logo.png" alt="Mansukh Logo">
+    </div>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+  </header>
+
+  <main>
+    <div class="background-image">
+      <img src="/static/images/Bg.png" alt="Background Image">
+  </div>
+    <iframe src="http://localhost:7860/" width="70%" height="600"></iframe>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Mansukh. All rights reserved.</p>
+  </footer>
 </body>
 </html>
+

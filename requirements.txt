@@ -6,4 +6,6 @@ pinecone
 langchain
 Flask
 httpx
+Flask_WTF
+bcrypt
 # chat_env 
